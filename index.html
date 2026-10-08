@@ -7,42 +7,95 @@
     <title>Gamer's Hub</title>
     <meta name="description"
         content="A premium collection of mini-games with stunning animations, glassmorphism, and smooth transitions.">
-    <meta name="theme-color" content="#03030c">
+    <meta name="theme-color" content="#05060d">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="motion.css">
 </head>
 
 <body>
-    <div class="background-glow"></div>
+    <!-- 6-LAYER CYBERPUNK BACKGROUND SYSTEM -->
+    <div class="cyber-bg-base"></div>
+    <div class="cyber-city-bg"></div>
+    <div class="cyber-grid-floor"></div>
+    <div class="cyber-orbs-container">
+        <div class="color-orb orb-purple"></div>
+        <div class="color-orb orb-cyan"></div>
+        <div class="color-orb orb-magenta"></div>
+    </div>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
 
     <!-- LOGIN GATE -->
-    <div id="profile-gate" class="overlay">
-        <div class="setup-content glass">
-            <div class="gate-icon">🎮</div>
-            <h2>Welcome <span>Gamer</span></h2>
-            <p class="gate-sub">Enter your handle to join the hub</p>
-            <input type="text" id="user-name-input" class="glass-input" placeholder="Your gamer tag..." maxlength="15"
-                autocomplete="off">
-            <button id="enter-hub-btn" class="glass-btn primary">ENTER HUB</button>
+    <div id="profile-gate" class="overlay profile-gate-overlay">
+        <div class="setup-content glass login-card">
+            <div class="gate-status-pill">
+                <span class="status-live-dot"></span>
+                <span>SYS // NEURAL LINK READY</span>
+            </div>
+            <div class="gate-icon-wrapper">
+                <div class="gate-icon-aura"></div>
+                <div class="gate-icon">⚡</div>
+            </div>
+            <h2 class="cyber-heading">NEURAL <span>ARCADE</span></h2>
+            <p class="gate-sub">CONNECT YOUR NEURAL INTERFACE TAG</p>
+
+            <div class="cyber-input-group">
+                <div class="cyber-input-wrapper">
+                    <span class="cyber-input-prefix">TAG //</span>
+                    <input type="text" id="user-name-input" class="glass-input cyber-input"
+                        placeholder="ENTER GAMERTAG..." maxlength="15" autocomplete="off" spellcheck="false">
+                    <span class="cyber-input-badge-icon" id="input-tag-badge">🎮</span>
+                    <div class="cyber-input-glowline"></div>
+                </div>
+
+                <div class="input-tag-presets">
+                    <span class="preset-label">QUICK TAGS:</span>
+                    <button type="button" class="preset-chip" onclick="App.setQuickTag('CYBER_NINJA')">CYBER_NINJA</button>
+                    <button type="button" class="preset-chip" onclick="App.setQuickTag('NEO_GHOST')">NEO_GHOST</button>
+                    <button type="button" class="preset-chip" onclick="App.setQuickTag('VORTEX_99')">VORTEX_99</button>
+                    <button type="button" class="preset-chip randomize-btn" onclick="App.randomizeTag()" title="Generate Random Tag">🎲 ROLL</button>
+                </div>
+            </div>
+
+            <button id="enter-hub-btn" class="glass-btn primary cyber-btn-primary login-btn">
+                <span>INITIALIZE LINK</span>
+                <span class="btn-arrow">➔</span>
+            </button>
+
+            <div class="gate-footer-spec">
+                <span>⚡ 256-BIT ENCRYPTED SESSION</span>
+                <span class="spec-dot">•</span>
+                <span>SYS_VER 4.2.0</span>
+            </div>
         </div>
     </div>
 
     <!-- MAIN DASHBOARD -->
     <main id="main-dashboard" class="hidden">
-        <header class="app-header">
+        <header class="app-header cyber-hud-bar">
             <div class="brand">
-                <h1>GAMER'S <span>HUB</span></h1>
-                <div class="live-indicator"><span class="pulse"></span> ONLINE</div>
+                <h1 class="cyber-glitch-logo" data-text="NEURAL//HUB">NEURAL<span>//HUB</span></h1>
+                <div class="brand-sub-row">
+                    <span class="live-indicator"><span class="pulse"></span> ONLINE</span>
+                    <span class="hud-tick">//</span>
+                    <span id="lobby-sub" class="cyber-sub">SYS_VER 4.2.0</span>
+                </div>
             </div>
             <div class="search-container">
-                <input type="text" id="game-search" class="glass-input small" placeholder="🔍 Search games...">
+                <input type="text" id="game-search" class="glass-input small cyber-search" placeholder="🔍 SEARCH CARTRIDGE...">
             </div>
-            <div class="header-user" id="header-user"></div>
+            <div class="header-actions">
+                <button id="sound-toggle-btn" class="sound-toggle-btn sound-on" title="Toggle audio effects">🔊 AUDIO</button>
+                <button id="open-coach-btn" class="coach-header-btn">🧠 TACTICAL AI</button>
+                <div class="header-user" id="header-user"></div>
+            </div>
         </header>
 
         <div class="dashboard-body">
@@ -84,7 +137,10 @@
         <div class="game-actions-bar">
             <button id="back-to-hub" class="back-btn">&larr; HUB</button>
             <div id="game-title-bar"></div>
-            <button id="restart-game-btn" class="back-btn restart-btn">↺ RESTART</button>
+            <div class="game-action-right">
+                <button id="game-coach-btn" class="back-btn coach-btn-mini">🧠 COACH TIPS</button>
+                <button id="restart-game-btn" class="back-btn restart-btn">↺ RESTART</button>
+            </div>
         </div>
         <div id="game-content-container"></div>
     </div>
@@ -103,7 +159,43 @@
         </div>
     </div>
 
-    <!-- Game modules -->
+    <!-- COACH & STRATEGY MODAL -->
+    <div id="coach-modal" class="modal">
+        <div class="coach-modal-content glass">
+            <div class="coach-modal-header">
+                <div class="coach-brand">
+                    <span class="coach-icon">🧠</span>
+                    <div>
+                        <h2>ARCADE <span>COACH</span></h2>
+                        <p class="coach-tagline">Rules, Prioritized Strategies &amp; Cheat Sheets</p>
+                    </div>
+                </div>
+                <button id="close-coach-modal" class="coach-close-btn" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="coach-tab-nav">
+                <button class="coach-tab-btn active" id="tab-btn-guide" onclick="App.switchCoachTab('guide')">🎯 GAME GUIDE</button>
+                <button class="coach-tab-btn" id="tab-btn-cheatsheet" onclick="App.switchCoachTab('cheatsheet')">📋 ARCADE CHEAT SHEET</button>
+            </div>
+
+            <!-- TAB 1: INDIVIDUAL GAME GUIDE -->
+            <div id="coach-tab-guide" class="coach-tab-panel">
+                <div class="coach-game-pills" id="coach-game-pills"></div>
+                <div class="coach-guide-body" id="coach-guide-body"></div>
+            </div>
+
+            <!-- TAB 2: COMPLETE ARCADE CHEAT SHEET -->
+            <div id="coach-tab-cheatsheet" class="coach-tab-panel hidden">
+                <div class="cheatsheet-intro">
+                    <p>⚡ <strong>One-Page Master Cheat Sheet:</strong> Top 3 high-impact winning tactics for all 15 arcade games.</p>
+                </div>
+                <div class="cheatsheet-grid" id="cheatsheet-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio & Game modules -->
+    <script src="games/audio.js"></script>
     <script src="games/ttt.js"></script>
     <script src="games/candy.js"></script>
     <script src="games/memory.js"></script>
@@ -119,6 +211,7 @@
     <script src="games/connections.js"></script>
     <script src="games/math.js"></script>
     <script src="games/colorfill.js"></script>
+    <script src="games/coach_data.js"></script>
     <script src="script.js"></script>
 </body>
 
